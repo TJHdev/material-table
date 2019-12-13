@@ -231,7 +231,7 @@ export default class DataManager {
     this.sorted = false;
   }
 
-    changeColumnHidden(column, hidden) {
+  changeColumnHidden(column, hidden) {
     column.hidden = hidden;
   }
 
@@ -289,8 +289,8 @@ export default class DataManager {
 
       // get the effective start and end considering hidden columns
       const sorted = this.columns
-          .sort((a, b) => a.tableData.columnOrder - b.tableData.columnOrder)
-          .filter(column => column.tableData.groupOrder === undefined);
+        .sort((a, b) => a.tableData.columnOrder - b.tableData.columnOrder)
+        .filter(column => column.tableData.groupOrder === undefined);
       let numHiddenBeforeStart = 0;
       let numVisibleBeforeStart = 0;
       for (let i = 0; i < sorted.length && numVisibleBeforeStart <= start; i++) {
@@ -633,7 +633,7 @@ export default class DataManager {
 
         if (!group) {
           const path = [...(o.path || []), value];
-          let oldGroup = this.findGroupByGroupPath(this.groupedData, path) || { isExpanded: (typeof this.defaultExpanded ==='boolean') ? this.defaultExpanded : false };
+          let oldGroup = this.findGroupByGroupPath(this.groupedData, path) || { isExpanded: (typeof this.defaultExpanded === 'boolean') ? this.defaultExpanded : false };
 
           group = { value, groups: [], groupsIndex: {}, data: [], isExpanded: oldGroup.isExpanded, path: path };
           o.groups.push(group);
@@ -662,12 +662,12 @@ export default class DataManager {
 
     // if filter or search is enabled, collapse the tree
     if (this.searchText || this.columns.some(columnDef => columnDef.tableData.filterValue)) {
-      this.data.forEach(row => {
-        row.tableData.isTreeExpanded = false;
-      });
+      // this.data.forEach(row => {
+      //   row.tableData.isTreeExpanded = false;
+      // });
 
       // expand the tree for all nodes present after filtering and searching
-      this.expandTreeForNodes(this.searchedData);
+      // this.expandTreeForNodes(this.searchedData);
     }
 
     const addRow = (rowData) => {
@@ -722,7 +722,7 @@ export default class DataManager {
     this.data.forEach(rowData => {
       if (!this.searchText && !this.columns.some(columnDef => columnDef.tableData.filterValue)) {
         if (rowData.tableData.isTreeExpanded === undefined) {
-          var isExpanded = (typeof this.defaultExpanded ==='boolean') ? this.defaultExpanded : this.defaultExpanded(rowData);
+          var isExpanded = (typeof this.defaultExpanded === 'boolean') ? this.defaultExpanded : this.defaultExpanded(rowData);
           rowData.tableData.isTreeExpanded = isExpanded;
         }
       }
